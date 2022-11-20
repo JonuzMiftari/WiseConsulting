@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\WebUI\WebUI_Angular.csproj" />
+        <ProjectReference Include="..\..\src\WebUI_Angular\WebUI_Angular.csproj" />
     </ItemGroup>
 
 </Project>
