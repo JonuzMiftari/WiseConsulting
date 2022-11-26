@@ -29,6 +29,7 @@ public class GetOrderCategoriesWithPaginationQueryHandler :
         GetOrderCategoriesWithPaginationQuery request,
         CancellationToken cancellationToken)
     {
+        //TODO: Remove test code with static data
         var items = new List<OrderCategoryVm>()
         {
             new OrderCategoryVm

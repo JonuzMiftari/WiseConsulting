@@ -10,7 +10,7 @@ export class OrderCategories extends Component {
   }
 
   componentDidMount() {
-      this.populateordercategoriesData();
+      this.populateOrderCategoriesData();
   }
 
     static renderOrderCategoriesTable(ordercategories) {
@@ -50,7 +50,7 @@ export class OrderCategories extends Component {
     );
   }
 
-async populateordercategoriesData() {
+async populateOrderCategoriesData() {
     const response = await fetch('ordercategory');
     const responseData = await response;
     console.log(responseData);

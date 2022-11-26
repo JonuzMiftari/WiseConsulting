@@ -13,10 +13,6 @@ public class OrderCategoryController : ControllerBase
 
     private ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
-    public OrderCategoryController()
-    {
-    }
-
     [HttpGet]
     public async Task<ActionResult<PaginatedList<OrderCategoryVm>>> Get()
         => await Mediator.Send(new GetOrderCategoriesWithPaginationQuery());

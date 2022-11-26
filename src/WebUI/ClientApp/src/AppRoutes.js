@@ -17,12 +17,12 @@ const AppRoutes = [
     path: '/fetch-data',
     requireAuth: false,
     element: <FetchData />
-    },
-    {
-        path: '/ordercategory',
-        requireAuth: false,
-        element: <OrderCategories />
-    },
+  },
+  {
+    path: '/ordercategory',
+    requireAuth: false,
+    element: <OrderCategories />
+  },
   ...ApiAuthorzationRoutes
 ];
 
