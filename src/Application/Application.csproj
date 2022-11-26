@@ -19,4 +19,16 @@
         <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="OrderCategory\Commands\" />
+      <None Remove="OrderCategory\EventHandlers\" />
+      <None Remove="OrderCategory\Queries\" />
+      <None Remove="OrderCategory\Queries\GetOrderCategoriesWithPagination\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="OrderCategories\Commands\" />
+      <Folder Include="OrderCategories\EventHandlers\" />
+      <Folder Include="OrderCategories\Queries\" />
+      <Folder Include="OrderCategories\Queries\GetOrderCategoriesWithPagination\" />
+    </ItemGroup>
 </Project>
