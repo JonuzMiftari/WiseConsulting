@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WiseConsulting.Application.OrderCategories.Queries.GetOrderCategoriesWithPagination;
 using WiseConsulting.Domain.Entities;
 using WiseConsulting.Infrastructure.Identity;
 
@@ -12,7 +13,11 @@ public class ApplicationDbContextInitialiser
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    public ApplicationDbContextInitialiser(
+        ILogger<ApplicationDbContextInitialiser> logger,
+        ApplicationDbContext context,
+        UserManager<ApplicationUser> userManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _logger = logger;
         _context = context;
@@ -24,7 +29,7 @@ public class ApplicationDbContextInitialiser
     {
         try
         {
-            if (!_context.Database.IsSqlServer())
+            if (_context.Database.IsSqlServer())
             {
                 await _context.Database.MigrateAsync();
             }
@@ -84,6 +89,27 @@ public class ApplicationDbContextInitialiser
                 }
             });
 
+            await _context.SaveChangesAsync();
+        }
+
+        // Seeding database with Order Categories (test data)
+        if (!_context.OrderCategories.Any())
+        {
+            _context.OrderCategories.AddRange(
+                new OrderCategory
+                {
+                    Code = "19.02",
+                    Description = "Test description for 19.02!",
+                    Price = 200
+                },
+                new OrderCategory
+                {
+                    Code = "12.10",
+                    Description = "Test description for 12.10!",
+                    Price = 300
+                });
+
+            // Throws Exception: Identity Insert needs to be ON for each insert command
             await _context.SaveChangesAsync();
         }
     }
