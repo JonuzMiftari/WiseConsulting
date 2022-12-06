@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using WiseConsulting.Application.Common.Interfaces;
 using WiseConsulting.Application.Common.Mappings;
 using WiseConsulting.Application.Common.Models;
@@ -29,32 +30,15 @@ public class GetOrderCategoriesWithPaginationQueryHandler :
         GetOrderCategoriesWithPaginationQuery request,
         CancellationToken cancellationToken)
     {
-        //TODO: Remove test code with static data
-        var items = new List<OrderCategoryVm>()
-        {
-            new OrderCategoryVm
-            {
-                Id = 1,
-                Code = "19.02",
-                Description = "Test description for 19.02!",
-                Price = 19
-            },
-            new OrderCategoryVm
-            {
-                Id = 2,
-                Code = "12.10",
-                Description = "Test description for 12.10!",
-                Price = 300
-            }
-        };
+        // Query to get all Order Categories from database
+        var categories = await _context.OrderCategories
+            .AsNoTracking()
+            .ProjectTo<OrderCategoryVm>(_mapper.ConfigurationProvider)
+            .OrderBy(o => o.Code)
+            .ToListAsync();
 
-        var orderCategoryListWithPagination = new PaginatedList<OrderCategoryVm>(items, 5, 5, 5);
+        var orderCategoryListWithPagination = new PaginatedList<OrderCategoryVm>(categories, 10, 1, 10);
 
         return orderCategoryListWithPagination;
-
-        //return await _context.OrderCategories
-        //    .OrderBy(x => x.Id)
-        //    .ProjectTo<OrderCategoryVm>(_mapper.ConfigurationProvider)
-        //    .PaginatedListAsync(request.PageNumber, request.PageSize);
-    }
+   }
 }
