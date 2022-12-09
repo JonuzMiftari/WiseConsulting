@@ -20,7 +20,6 @@ public class GetBanksQueryHandler : IRequestHandler<GetBanksQuery, List<Bank>>
         _mapper = mapper;
     }
 
-
     public async Task<List<Bank>> Handle(GetBanksQuery request, CancellationToken cancellationToken)
     {
         return await _context.Banks
