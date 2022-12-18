@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WiseConsulting.Domain.Entities;
 using WiseConsulting.Infrastructure.Identity;
+using WiseConsulting.Infrastructure.Persistence.Initialisers;
 
 namespace WiseConsulting.Infrastructure.Persistence;
 public class ApplicationDbContextInitialiser
@@ -12,7 +13,11 @@ public class ApplicationDbContextInitialiser
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    public ApplicationDbContextInitialiser(
+        ILogger<ApplicationDbContextInitialiser> logger,
+        ApplicationDbContext context,
+        UserManager<ApplicationUser> userManager,
+        RoleManager<IdentityRole> roleManager)
     {
         _logger = logger;
         _context = context;
@@ -51,6 +56,9 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
+        // Data initialisers
+        var bankInitialiser = new BankInitialiser(this._context);
+
         // Default roles
         var administratorRole = new IdentityRole("Administrator");
 
@@ -86,5 +94,7 @@ public class ApplicationDbContextInitialiser
 
             await _context.SaveChangesAsync();
         }
+
+        bankInitialiser.Seed();
     }
 }
