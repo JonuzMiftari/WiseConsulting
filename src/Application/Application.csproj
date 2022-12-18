@@ -19,4 +19,13 @@
         <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Banks\" />
+      <Folder Include="Banks\Commands\" />
+      <Folder Include="Banks\Queries\" />
+      <Folder Include="Banks\Queries\GetBanks\" />
+      <Folder Include="Banks\Commands\CreateBank\" />
+      <Folder Include="Banks\Commands\UpdateBank\" />
+      <Folder Include="Banks\Commands\DeleteBank\" />
+    </ItemGroup>
 </Project>
