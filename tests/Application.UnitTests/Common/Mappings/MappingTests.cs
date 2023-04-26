@@ -2,8 +2,8 @@
 using AutoMapper;
 using NUnit.Framework;
 using WiseConsulting.Application.Common.Mappings;
-using WiseConsulting.Application.Common.Models;
-using WiseConsulting.Application.TodoLists.Queries.GetTodos;
+using WiseConsulting.Application.Companies.Models;
+using WiseConsulting.Application.OrderCategories.Queries.GetOrderCategoriesWithPagination;
 using WiseConsulting.Domain.Entities;
 
 namespace WiseConsulting.Application.UnitTests.Common.Mappings;
@@ -27,10 +27,10 @@ public class MappingTests
     }
 
     [Test]
-    [TestCase(typeof(TodoList), typeof(TodoListDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
-    [TestCase(typeof(TodoList), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(LookupDto))]
+    [TestCase(typeof(Company), typeof(CompanyDto))]
+    [TestCase(typeof(OrderCategory), typeof(OrderCategoryVm))]
+    //[TestCase(typeof(TodoList), typeof(LookupDto))]
+    //[TestCase(typeof(TodoItem), typeof(LookupDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

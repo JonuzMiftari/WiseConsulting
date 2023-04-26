@@ -9,6 +9,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="OrderCategories\Commands\**" />
+      <Compile Remove="OrderCategories\EventHandlers\**" />
+      <EmbeddedResource Remove="OrderCategories\Commands\**" />
+      <EmbeddedResource Remove="OrderCategories\EventHandlers\**" />
+      <None Remove="OrderCategories\Commands\**" />
+      <None Remove="OrderCategories\EventHandlers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.3.4" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
@@ -26,8 +35,6 @@
       <None Remove="OrderCategory\Queries\GetOrderCategoriesWithPagination\" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="OrderCategories\Commands\" />
-      <Folder Include="OrderCategories\EventHandlers\" />
       <Folder Include="OrderCategories\Queries\" />
       <Folder Include="OrderCategories\Queries\GetOrderCategoriesWithPagination\" />
     </ItemGroup>

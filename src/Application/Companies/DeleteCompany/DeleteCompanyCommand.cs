@@ -25,8 +25,7 @@ public class DeleteCompanyCommandHandler : IRequestHandler<DeleteCompanyCommand>
 
         _context.Companies.Remove(entity);
 
-        // TODO: add CompanyDeletedEvent
-        // entity.AddDomainEvent(new CompanyDeletedEvent(entity));
+        entity.AddDomainEvent(new CompanyDeletedEvent(entity));
 
         await _context.SaveChangesAsync(cancellationToken);
 

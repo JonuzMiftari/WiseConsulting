@@ -3,6 +3,7 @@ using WiseConsulting.Application.Common.Interfaces;
 using WiseConsulting.Application.Companies.Models;
 using WiseConsulting.Domain.Entities;
 using WiseConsulting.Domain.Enums;
+using WiseConsulting.Domain.Events;
 
 namespace WiseConsulting.Application.Companies.CreateCompany;
 public class CreateCompanyCommand : CompanyDto, IRequest<int> { }
@@ -38,8 +39,7 @@ public class CreateCompanyCommandHandler: IRequestHandler<CreateCompanyCommand, 
             InvoiceSigningPersonType = (SigningPersonType)request.InvoiceSigningPersonType
         };
 
-        // TODO: if needed add domain event for Company Created Event
-        //entity.AddDomainEvent(new CompanyCreatedEvent(entity));
+        entity.AddDomainEvent(new CompanyCreatedEvent(entity));
 
         _context.Companies.Add(entity);
 

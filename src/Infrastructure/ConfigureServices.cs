@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using WiseConsulting.Application.Common.Interfaces;
-using WiseConsulting.Infrastructure.Files;
+//using WiseConsulting.Infrastructure.Files;
 using WiseConsulting.Infrastructure.Identity;
 using WiseConsulting.Infrastructure.Persistence;
 using WiseConsulting.Infrastructure.Persistence.Interceptors;
@@ -30,7 +30,7 @@ public static class ConfigureServices
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-        services.AddScoped<ApplicationDbContextInitialiser>();
+        services.AddScoped<ApplicationDbContextInitializer>();
 
         services
             .AddDefaultIdentity<ApplicationUser>()
@@ -42,7 +42,7 @@ public static class ConfigureServices
 
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
-        services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
+        //services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
         services.AddAuthentication()
             .AddIdentityServerJwt();

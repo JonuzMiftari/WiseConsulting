@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Outlet } from 'react-router-dom';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -27,7 +28,7 @@ function Copyright(props) {
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                WiseConsulting
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -160,38 +161,20 @@ function DashboardContent() {
                     }}
                 >
                     <Toolbar />
-                    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                        <Grid container spacing={3}>
-                            {/* Chart */}
-                            <Grid item xs={12} md={8} lg={9}>
+                    <Container maxWidth="xl" disableGutters='true' sx={{ mt: 4, mb: 4 }}>
+                        <Grid container spacing={0}
+                            sx={{
+                                justifyContent: 'center'
+                            }}>
+                            <Grid item xs={12} md={8} lg={12}>
                                 <Paper
                                     sx={{
-                                        p: 2,
+                                        p: 4,
                                         display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
+                                        flexDirection: 'column'
                                     }}
                                 >
-                                    <Chart />
-                                </Paper>
-                            </Grid>
-                            {/* Recent Deposits */}
-                            <Grid item xs={12} md={4} lg={3}>
-                                <Paper
-                                    sx={{
-                                        p: 2,
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        height: 240,
-                                    }}
-                                >
-                                    <Deposits />
-                                </Paper>
-                            </Grid>
-                            {/* Recent Orders */}
-                            <Grid item xs={12}>
-                                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                    <Orders />
+                                    <Outlet />
                                 </Paper>
                             </Grid>
                         </Grid>

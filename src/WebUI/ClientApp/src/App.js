@@ -2,31 +2,24 @@ import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
-import { Layout } from './components/Layout';
+import Dashboard from './components/Dashboard';
 import './custom.css';
-import Dashbard from './components/Dashboard'
 
 export default class App extends Component {
-  static displayName = App.name;
+    static displayName = App.name;
 
-  render() {
-      return (
-          <Dashbard>
-              {/*<Routes>*/}
-              {/*    {AppRoutes.map((route, index) => {*/}
-              {/*        const { element, requireAuth, ...rest } = route;*/}
-              {/*        return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} />;*/}
-              {/*    })}*/}
-              {/*</Routes>*/}
-          </Dashbard>
-      //<Layout>
-      //  <Routes>
-      //    {AppRoutes.map((route, index) => {
-      //      const { element, requireAuth, ...rest } = route;
-      //      return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} />;
-      //    })}
-      //  </Routes>
-      //</Layout>
-    );
-  }
+    render() {
+        return (
+            <Routes>
+                <Route element={<Dashboard />} >
+                    {
+                        AppRoutes.map((route, index) => {
+                            const { path, element, requireAuth, ...rest } = route;
+                            return <Route path={path} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} key={index} />
+                        })
+                    }
+                </Route>
+            </Routes>
+        )
+    }
 }
